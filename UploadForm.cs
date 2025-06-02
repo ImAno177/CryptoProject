@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Crypto
 {
-    public partial class Form1 : Form
+    public partial class UploadForm : Form
     {
-        public Form1()
+        public UploadForm()
         {
             InitializeComponent();
         }
