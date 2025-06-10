@@ -36,27 +36,6 @@ namespace Crypto
             }
         }
 
-        private void UploadBtn_Click(object sender, EventArgs e)
-        {
-            UploadPt.Visible = true;
-            DownloadPt.Visible = false;
-            DetailsPt.Visible = false;
-        }
-
-        private void DownloadBtn_Click(object sender, EventArgs e)
-        {
-            UploadPt.Visible = false;
-            DownloadPt.Visible = true;
-            DetailsPt.Visible = false;
-        }
-
-        private void DetailsBtn_Click(object sender, EventArgs e)
-        {
-            UploadPt.Visible = false;
-            DownloadPt.Visible = false;
-            DetailsPt.Visible = true;
-        }
-
         private void ExitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
