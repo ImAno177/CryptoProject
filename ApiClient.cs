@@ -100,9 +100,34 @@ public class ApiClient
         fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
         multipartFormContent.Add(fileStreamContent, name: "file", fileName: originalFileName);
 
+
         var response = await _httpClient.PostAsync(_baseUrl + "upload", multipartFormContent);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            Console.WriteLine($"--- Response Headers for 400 Error ---");
+            foreach (var header in response.Headers)
+            {
+                Console.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            }
+            if (response.Content != null)
+            {
+                foreach (var header in response.Content.Headers)
+                {
+                    Console.WriteLine($"ContentHeader - {header.Key}: {string.Join(", ", header.Value)}");
+                }
+                Console.WriteLine($"Content is null: {response.Content == null}"); // Kiểm tra xem Content có null không
+                string errorContent = await response.Content.ReadAsStringAsync(); // errorContent vẫn có thể null
+                Console.WriteLine($"Upload Error: {response.StatusCode} - errorContent is: '{errorContent}' (length: {errorContent?.Length ?? -1})");
+            }
+            else
+            {
+                Console.WriteLine("Response.Content is NULL for the 400 error.");
+            }
+        }
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<UploadResponse>();
+    
     }
 
     public async Task<DownloadInitiateResponse> InitiateDownloadAsync(string fileId, string clientKyberPkHex)

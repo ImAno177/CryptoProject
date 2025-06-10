@@ -95,7 +95,11 @@
                 UpdateStatus("Đang tạo khóa phiên và đóng gói...");
                 var (encapsulatedAesKeyBytes, aesKeyForFileEncryption) = CryptoService.EncapsulateKyber(serverKyberPkBytes);
                 var aesNonce = CryptoService.GenerateAesNonce(); // Nonce cho mã hóa file
-
+                Console.WriteLine($"C# Client - Session ID for upload: {initiateResponse.SessionId}");
+                Console.WriteLine($"C# Client - Server Kyber PK (hex, first 32B): {initiateResponse.ServerKyberPkHex.Substring(0, Math.Min(64, initiateResponse.ServerKyberPkHex.Length))}");
+                Console.WriteLine($"C# Client - Encapsulated AES Key to Server (hex, first 32B): {CryptoService.HexConverter.ToHexString(encapsulatedAesKeyBytes).Substring(0, Math.Min(64, CryptoService.HexConverter.ToHexString(encapsulatedAesKeyBytes).Length))}");
+                Console.WriteLine($"C# Client - Generated AES Key for File (hex): {CryptoService.HexConverter.ToHexString(aesKeyForFileEncryption)}");
+                Console.WriteLine($"C# Client - Generated AES Nonce for File (hex): {CryptoService.HexConverter.ToHexString(aesNonce)}");
                 // 3. Client: Mã hóa file bằng AES-GCM (ss1, n1) -> file_encrypted, tag (t1)
                 UpdateStatus("Đang mã hóa file...");
                 byte[] aesTag;
@@ -104,7 +108,8 @@
                 {
                     aesTag = CryptoService.EncryptStreamAesGcm(inputFileStream, tempEncryptedFileStream, aesKeyForFileEncryption, aesNonce);
                 }
-
+                string aesTagHexClient = CryptoService.HexConverter.ToHexString(aesTag);
+                Console.WriteLine($"C# Client - Generated AES Tag for File (hex): {aesTagHexClient}");
                 // 4. Client: Tính SHA256 checksum của file gốc (plaintext_sha256_checksum_hex)
                 UpdateStatus("Đang tính checksum file gốc...");
                 string sha256ChecksumOriginal = await CryptoService.CalculateSha256ChecksumAsync(_selectedFileForUploadPath);
@@ -159,7 +164,7 @@
                 MessageBox.Show("Không thể xác định thông tin file đã chọn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             string fileIdToDownload = selectedFileItem.FileId;
             string originalFileName = selectedFileItem.OriginalFilename;
 
@@ -250,6 +255,8 @@
                 }
                 _clientKyberPrivateKeyForDownload = null; // Xóa khóa bí mật sau khi dùng
             }
-        }  
+        }
+
+        
     }
 }

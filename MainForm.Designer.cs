@@ -43,15 +43,15 @@
             // 
             // txtServerUrl
             // 
-            txtServerUrl.Location = new Point(31, 31);
+            txtServerUrl.Location = new Point(31, 34);
             txtServerUrl.Name = "txtServerUrl";
-            txtServerUrl.Size = new Size(802, 49);
+            txtServerUrl.Size = new Size(1340, 49);
             txtServerUrl.TabIndex = 0;
             txtServerUrl.TextChanged += txtServerUrl_TextChanged;
             // 
             // btnDownload
             // 
-            btnDownload.Location = new Point(869, 181);
+            btnDownload.Location = new Point(1418, 225);
             btnDownload.Name = "btnDownload";
             btnDownload.Size = new Size(169, 52);
             btnDownload.TabIndex = 1;
@@ -62,15 +62,15 @@
             // dgvFiles
             // 
             dgvFiles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFiles.Location = new Point(0, 258);
+            dgvFiles.Location = new Point(0, 304);
             dgvFiles.Name = "dgvFiles";
             dgvFiles.RowHeadersWidth = 92;
-            dgvFiles.Size = new Size(1075, 377);
+            dgvFiles.Size = new Size(1614, 629);
             dgvFiles.TabIndex = 2;
             // 
             // btnSelectUploadFile
             // 
-            btnSelectUploadFile.Location = new Point(664, 111);
+            btnSelectUploadFile.Location = new Point(1202, 124);
             btnSelectUploadFile.Name = "btnSelectUploadFile";
             btnSelectUploadFile.Size = new Size(169, 52);
             btnSelectUploadFile.TabIndex = 3;
@@ -80,7 +80,7 @@
             // 
             // btnUpload
             // 
-            btnUpload.Location = new Point(869, 106);
+            btnUpload.Location = new Point(1418, 133);
             btnUpload.Name = "btnUpload";
             btnUpload.Size = new Size(169, 52);
             btnUpload.TabIndex = 4;
@@ -90,7 +90,7 @@
             // 
             // btnListFiles
             // 
-            btnListFiles.Location = new Point(869, 31);
+            btnListFiles.Location = new Point(1418, 31);
             btnListFiles.Name = "btnListFiles";
             btnListFiles.Size = new Size(169, 52);
             btnListFiles.TabIndex = 5;
@@ -102,9 +102,9 @@
             // 
             statusStrip1.ImageScalingSize = new Size(36, 36);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(0, 673);
+            statusStrip1.Location = new Point(0, 955);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1075, 22);
+            statusStrip1.Size = new Size(1614, 22);
             statusStrip1.TabIndex = 6;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -116,7 +116,7 @@
             // lblSelectedUploadFile
             // 
             lblSelectedUploadFile.AutoSize = true;
-            lblSelectedUploadFile.Location = new Point(31, 111);
+            lblSelectedUploadFile.Location = new Point(31, 129);
             lblSelectedUploadFile.Name = "lblSelectedUploadFile";
             lblSelectedUploadFile.Size = new Size(0, 42);
             lblSelectedUploadFile.TabIndex = 8;
@@ -125,7 +125,7 @@
             // 
             AutoScaleDimensions = new SizeF(17F, 42F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1075, 695);
+            ClientSize = new Size(1614, 977);
             Controls.Add(lblSelectedUploadFile);
             Controls.Add(statusStrip1);
             Controls.Add(btnListFiles);
