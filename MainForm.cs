@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crypto.HelperClass;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace Crypto
         public MainForm()
         {
             InitializeComponent();
+            LoadFiles.LoadAllFiles(this.FileList);
         }
 
         [DllImport("user32.dll")]
@@ -39,6 +41,11 @@ namespace Crypto
         private void ExitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void F5Button_Click(object sender, EventArgs e)
+        {
+            LoadFiles.LoadAllFiles(this.FileList);
         }
     }
 }
