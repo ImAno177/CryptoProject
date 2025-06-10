@@ -150,6 +150,7 @@ namespace Crypto
             this.DraggingSpace.Name = "DraggingSpace";
             this.DraggingSpace.Size = new System.Drawing.Size(1134, 50);
             this.DraggingSpace.TabIndex = 0;
+            this.DraggingSpace.MouseDown += Drag_MouseDown;
             this.DraggingSpace.TabStop = false;
             // 
             // F5Button
