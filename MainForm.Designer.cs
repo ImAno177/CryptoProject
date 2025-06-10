@@ -81,6 +81,7 @@ namespace Crypto
             this.FileList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.FileList.Size = new System.Drawing.Size(1020, 719);
             this.FileList.TabIndex = 14;
+            this.FileList.RowEnter += FileList_RowEnter;
             // 
             // FileIDHeader
             // 
@@ -123,6 +124,7 @@ namespace Crypto
             this.DownloadBtn.TabIndex = 11;
             this.DownloadBtn.Text = "Download";
             this.DownloadBtn.UseVisualStyleBackColor = true;
+            this.DownloadBtn.Click += new System.EventHandler(this.DownloadBtn_Click);
             // 
             // UploadBtn
             // 
