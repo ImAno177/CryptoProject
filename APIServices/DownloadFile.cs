@@ -61,8 +61,6 @@ namespace Crypto.APIServices
             DecryptStreamAesGcm(tempEncryptedPath, outputPath, aesKey, aesNonce);
 
             File.Delete(tempEncryptedPath);
-
-            Console.WriteLine($"File saved to: {outputPath}");
         }
 
         private static void DecryptStreamAesGcm(string encryptedPath, string outputPath, byte[] key, byte[] nonce)

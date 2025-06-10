@@ -14,5 +14,7 @@ namespace Crypto.HelperClass
                 .Select(x => Convert.ToByte(hex.Substring(x * 2, 2), 16))
                 .ToArray();
         }
+
+        public static string ToHexString(byte[] ba) => BitConverter.ToString(ba).Replace("-", "").ToLowerInvariant();
     }
 }

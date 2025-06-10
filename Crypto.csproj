@@ -82,10 +82,12 @@
   <ItemGroup>
     <Compile Include="APIServices\DownloadFile.cs" />
     <Compile Include="APIServices\FileService.cs" />
+    <Compile Include="APIServices\UploadFile.cs" />
     <Compile Include="HelperClass\Converter.cs" />
     <Compile Include="HelperClass\CryptoHelper.cs" />
     <Compile Include="HelperClass\DownloadFileHelper.cs" />
     <Compile Include="HelperClass\LoadFiles.cs" />
+    <Compile Include="HelperClass\UploadFileHelper.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +102,7 @@
     </Compile>
     <Compile Include="Models\DownloadInitiateResponse.cs" />
     <Compile Include="Models\FileListItem.cs" />
+    <Compile Include="Models\ServerKeyResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LoginForm.resx">
