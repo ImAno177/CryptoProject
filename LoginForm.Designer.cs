@@ -47,7 +47,6 @@ namespace Crypto
             this.DraggingSpace.Size = new System.Drawing.Size(700, 50);
             this.DraggingSpace.TabIndex = 0;
             this.DraggingSpace.TabStop = false;
-            this.DraggingSpace.MouseDown += Drag_MouseDown;
             // 
             // LoginLabel
             // 
@@ -56,7 +55,7 @@ namespace Crypto
             this.LoginLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.LoginLabel.Location = new System.Drawing.Point(274, 71);
             this.LoginLabel.Name = "LoginLabel";
-            this.LoginLabel.Size = new System.Drawing.Size(126, 50);
+            this.LoginLabel.Size = new System.Drawing.Size(101, 40);
             this.LoginLabel.TabIndex = 1;
             this.LoginLabel.Text = "Login";
             // 
@@ -64,14 +63,14 @@ namespace Crypto
             // 
             this.UsernameTb.Location = new System.Drawing.Point(175, 187);
             this.UsernameTb.Name = "UsernameTb";
-            this.UsernameTb.Size = new System.Drawing.Size(329, 22);
+            this.UsernameTb.Size = new System.Drawing.Size(329, 20);
             this.UsernameTb.TabIndex = 2;
             // 
             // PasswordTb
             // 
             this.PasswordTb.Location = new System.Drawing.Point(175, 278);
             this.PasswordTb.Name = "PasswordTb";
-            this.PasswordTb.Size = new System.Drawing.Size(329, 22);
+            this.PasswordTb.Size = new System.Drawing.Size(329, 20);
             this.PasswordTb.TabIndex = 3;
             this.PasswordTb.UseSystemPasswordChar = true;
             // 
@@ -82,7 +81,7 @@ namespace Crypto
             this.UsernameLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.UsernameLabel.Location = new System.Drawing.Point(101, 138);
             this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(130, 31);
+            this.UsernameLabel.Size = new System.Drawing.Size(108, 26);
             this.UsernameLabel.TabIndex = 4;
             this.UsernameLabel.Text = "Username";
             // 
@@ -93,7 +92,7 @@ namespace Crypto
             this.PasswordLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.PasswordLabel.Location = new System.Drawing.Point(101, 226);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(124, 31);
+            this.PasswordLabel.Size = new System.Drawing.Size(102, 26);
             this.PasswordLabel.TabIndex = 5;
             this.PasswordLabel.Text = "Password";
             // 
@@ -106,6 +105,7 @@ namespace Crypto
             this.LoginButton.TabIndex = 6;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // LoginForm
             // 

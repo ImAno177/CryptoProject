@@ -36,8 +36,7 @@ namespace Crypto
             this.FileList = new System.Windows.Forms.DataGridView();
             this.FileIDHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FilenameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SizeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UploadAtCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OwnerCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DownloadBtn = new System.Windows.Forms.Button();
             this.UploadBtn = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.PictureBox();
@@ -50,6 +49,7 @@ namespace Crypto
             // 
             // FileList
             // 
+            this.FileList.AllowUserToAddRows = false;
             this.FileList.AllowUserToResizeRows = false;
             this.FileList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -64,8 +64,7 @@ namespace Crypto
             this.FileList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FileIDHeader,
             this.FilenameCol,
-            this.SizeCol,
-            this.UploadAtCol});
+            this.OwnerCol});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
@@ -77,42 +76,40 @@ namespace Crypto
             this.FileList.GridColor = System.Drawing.Color.Gainsboro;
             this.FileList.Location = new System.Drawing.Point(12, 69);
             this.FileList.Name = "FileList";
+            this.FileList.ReadOnly = true;
             this.FileList.RowHeadersVisible = false;
+            this.FileList.RowHeadersWidth = 51;
             this.FileList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.FileList.Size = new System.Drawing.Size(1020, 719);
             this.FileList.TabIndex = 14;
+            this.FileList.RowEnter += FileList_RowEnter;
             // 
             // FileIDHeader
             // 
             this.FileIDHeader.HeaderText = "FileID";
+            this.FileIDHeader.MinimumWidth = 6;
             this.FileIDHeader.Name = "FileIDHeader";
             this.FileIDHeader.ReadOnly = true;
             this.FileIDHeader.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FileIDHeader.Width = 400;
+            this.FileIDHeader.Width = 500;
             // 
             // FilenameCol
             // 
             this.FilenameCol.HeaderText = "Filename";
+            this.FilenameCol.MinimumWidth = 6;
             this.FilenameCol.Name = "FilenameCol";
             this.FilenameCol.ReadOnly = true;
             this.FilenameCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FilenameCol.Width = 250;
+            this.FilenameCol.Width = 335;
             // 
-            // SizeCol
+            // OwnerCol
             // 
-            this.SizeCol.HeaderText = "Size";
-            this.SizeCol.Name = "SizeCol";
-            this.SizeCol.ReadOnly = true;
-            this.SizeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.SizeCol.Width = 170;
-            // 
-            // UploadAtCol
-            // 
-            this.UploadAtCol.HeaderText = "Upload At";
-            this.UploadAtCol.Name = "UploadAtCol";
-            this.UploadAtCol.ReadOnly = true;
-            this.UploadAtCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.UploadAtCol.Width = 197;
+            this.OwnerCol.HeaderText = "Role";
+            this.OwnerCol.MinimumWidth = 6;
+            this.OwnerCol.Name = "OwnerCol";
+            this.OwnerCol.ReadOnly = true;
+            this.OwnerCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.OwnerCol.Width = 170;
             // 
             // DownloadBtn
             // 
@@ -152,8 +149,8 @@ namespace Crypto
             this.DraggingSpace.Name = "DraggingSpace";
             this.DraggingSpace.Size = new System.Drawing.Size(1134, 50);
             this.DraggingSpace.TabIndex = 0;
-            this.DraggingSpace.MouseDown += Drag_MouseDown;
             this.DraggingSpace.TabStop = false;
+            this.DraggingSpace.MouseDown += Drag_MouseDown;
             // 
             // F5Button
             // 
@@ -197,7 +194,6 @@ namespace Crypto
         private System.Windows.Forms.Button F5Button;
         private DataGridViewTextBoxColumn FileIDHeader;
         private DataGridViewTextBoxColumn FilenameCol;
-        private DataGridViewTextBoxColumn SizeCol;
-        private DataGridViewTextBoxColumn UploadAtCol;
+        private DataGridViewTextBoxColumn OwnerCol;
     }
 }

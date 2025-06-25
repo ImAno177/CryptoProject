@@ -1,27 +1,45 @@
-﻿using Crypto.HelperClass;
-using Crypto.Models;
+﻿using Crypto.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Crypto
 {
     public partial class MainForm : Form
     {
-        private FileListItem Picked;
-        public MainForm()
+        private UserData userData;
+        private FileMetadata picked;
+
+        public MainForm(UserData userData, List<FileMetadata> fileMetadata)
         {
             InitializeComponent();
-            LoadFiles.LoadAllFiles(this.FileList);
-            Picked = new FileListItem();
+            this.userData = new UserData();
+            this.userData = userData;
+
+            try
+            {
+                FileList.Rows.Clear();
+
+                foreach (var file in fileMetadata)
+                {
+                    FileList.Rows.Add(
+                        file.fileID,
+                        file.fileName,
+                        file.role
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading files: " + ex.Message);
+            }
+
+            picked = new FileMetadata();
+
+            RegisterKey();
         }
 
         [DllImport("user32.dll")]
@@ -42,6 +60,26 @@ namespace Crypto
             }
         }
 
+        private async void LoadFiles()
+        {
+            List<FileMetadata> files = await HelperFunction.LoadAllFile(userData);
+            FileList.Rows.Clear();
+
+            foreach (var file in files)
+            {
+                FileList.Rows.Add(
+                    file.fileID,
+                    file.fileName,
+                    file.role
+                );
+            }
+        }
+
+        private async void RegisterKey()
+        {
+            await HelperFunction.GenerateKey(userData);
+        }
+
         private void ExitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -49,7 +87,7 @@ namespace Crypto
 
         private void F5Button_Click(object sender, EventArgs e)
         {
-            LoadFiles.LoadAllFiles(this.FileList);
+            LoadFiles();
         }
 
         private void FileList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -57,25 +95,29 @@ namespace Crypto
             if (e.RowIndex >= 0)
             {
                 var row = FileList.Rows[e.RowIndex];
-                Picked.file_id = row.Cells[0].Value.ToString();
-                Picked.original_filename = row.Cells[1].Value.ToString();
-                Picked.size = int.Parse(row.Cells[2].Value.ToString());
-                Picked.uploaded_at = row.Cells[3].Value.ToString();
+                picked.fileID = row.Cells[0].Value.ToString();
+                picked.fileName = row.Cells[1].Value.ToString();
+                picked.role = row.Cells[2].Value.ToString();
             }
         }
 
-        private async void DownloadBtn_Click(object sender, EventArgs e)
+        private void DownloadBtn_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
                 dialog.Title = "Save As";
-                dialog.FileName = Picked.original_filename;
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        await DownloadFileHelper.Download(Picked.file_id, dialog.FileName);
+                        string filePath = dialog.FileName;
+                        string filename = Path.GetFileName(filePath);
+
+                        using (FileStream fs = File.Create(filePath))
+                        {}
+
+                        HelperFunction.DownloadFile(userData, filePath, filename, picked.fileID);
                         MessageBox.Show("Download complete!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
@@ -86,8 +128,25 @@ namespace Crypto
             }
         }
 
-        private async void UploadBtn_Click(object sender, EventArgs e)
+        private void UploadBtn_Click(object sender, EventArgs e)
         {
+            var options = new List<string> { "user1", "user2", "user3" };
+            options.Remove(userData.Username);
+            List<string> recipients = new List<string>();
+            using (var dialog = new UserCheckBoxForm(options))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var selected = dialog.SelectedOptions;
+                    if (selected.Any())
+                        recipients = selected;
+                    else
+                        MessageBox.Show("No options selected.");
+                }
+            }
+
+            recipients.Add(userData.Username);
+
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
                 dialog.Title = "Open";
@@ -98,7 +157,9 @@ namespace Crypto
                     {
                         string filePath = dialog.FileName;
                         string originalFilename = Path.GetFileName(filePath);
-                        await UploadFileHelper.Upload(dialog.FileName, originalFilename);
+
+                        HelperFunction.UploadFile(userData, filePath, recipients);
+
                         MessageBox.Show("Upload complete!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
