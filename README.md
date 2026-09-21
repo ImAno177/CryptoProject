@@ -9,9 +9,9 @@ An academic prototype for authenticated file sharing. Files are encrypted with A
 
 ## Demo
 
-[![Open the 7:14 demo video](docs/demo-poster.jpg)](docs/crypto-project-demo.mp4)
+<video src="https://github.com/user-attachments/assets/5baf8d59-58fc-4895-95b0-8f193f15650d" width="100%" controls></video>
 
-**[Open the full demo video](docs/crypto-project-demo.mp4)** - 1280x720, 7:14. The recording shows login, key registration, encrypted upload, file sharing, access-controlled listing, and download.
+**[Open the full demo video](docs/crypto-project-demo.mp4)** - 1280x720, 7:14. The inline version is compressed below 10 MB and shows login, key registration, encrypted upload, file sharing, access-controlled listing, and download.
 
 ## What it demonstrates
 
